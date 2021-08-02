@@ -1,0 +1,22 @@
+{
+  "name": "amarzirouel_7_02082021",
+  "version": "1.0.0",
+  "description": "Projet 7 OC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmaruZ/AmarZirouel_7_02082021.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AmaruZ/AmarZirouel_7_02082021/issues"
+  },
+  "homepage": "https://github.com/AmaruZ/AmarZirouel_7_02082021#readme",
+  "dependencies": {
+    "bootstrap-icons": "^1.5.0"
+  }
+}
