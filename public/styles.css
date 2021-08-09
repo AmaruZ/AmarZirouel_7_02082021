@@ -89,3 +89,21 @@ ul{
 .btn{
     height: 69px;
 }
+
+.form-control{
+    border-right: none;
+    height: 69px
+}
+
+.ingredients__list{
+    position: absolute;
+    top: 69px;
+    color: white;
+    height: 328px;
+    width: 667px;
+    z-index: 4;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow: hidden;
+}

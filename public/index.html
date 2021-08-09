@@ -18,18 +18,20 @@
                 <input type="text" class="form-control rounded" placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette" />
                 <span class="icon-inside"><i class="bi bi-search"></i></span>
             </div>
-            <div class="filters"></div>
-            <div class="d-flex gap-4">
-                <div class="input-group ingredients">
-                    <input type="text" class="form-control bg-primary text-white rounded placeholder" placeholder="Ingrédients" />
-                    <span class="icon-inside"><i class="bi bi-chevron-down text-white"></i></span>
+            <div class="filters m-4"></div>
+            <div class="d-flex gap-4 tags">
+                <div class="input-group mb-3 ingredients rounded">
+                    <input type="text" class="form-control bg-primary text-white placeholder" aria-label="Ingrédients" placeholder="Ingrédients" >
+                    <span class="input-group-text chevron-ingredients bg-primary"><i class="bi bi-chevron-down text-white"></i></span>
                 </div>
-                <div class="input-group appareils">
-                    <input type="text" class="form-control bg-green rounded placeholder" placeholder="Appareils" />
-                    <span class="icon-inside"><i class="bi bi-chevron-down text-white"></i></i></span>
+                <div class="input-group mb-3 appareils rounded">
+                    <input type="text" class="form-control bg-success text-white placeholder" aria-label="Appareil" placeholder="Appareils" >
+                    <span class="input-group-text chevron-appareils bg-success"><i class="bi bi-chevron-down text-white"></i></span>
                 </div>
-                <button type="text" class="btn btn-danger rounded ustensils d-flex align-items-center" placeholder="Ustensiles">Ustensiles <span class="icon-inside"><i class="bi bi-chevron-down text-white"></i></span></button>
-                    
+                <div class="input-group mb-3 ustensils rounded">
+                    <input type="text" class="form-control bg-danger text-white placeholder" aria-label="Ustensiles" placeholder="Ustensiles" >
+                    <span class="input-group-text chevron-ustensils bg-danger"><i class="bi bi-chevron-down text-white"></i></span>
+                </div>
             </div>
         </section>
 
