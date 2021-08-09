@@ -1,7 +1,42 @@
 @import '/node_modules/bootstrap-icons/font/bootstrap-icons.css';
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
 
-.html{
-    font-size: 62.5%;
+body{
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    line-height: 0.75rem;
+}
+.h2{
+    font-weight: 400;
+    font-size: 1.125rem;
+    line-height: 1.35rem;
+}
+.h4{
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+.h5{
+    font-weight: 700;
+    font-size: 0.75rem;
+}
+.h6{
+    font-family: "Roboto";
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 0.75rem;
+}
+
+ul{
+    list-style-type: none;
+    padding: 0;
+}
+.bg-green{
+    background-color: #68D9A4;
+}
+
+.header{
+    display: flex;
+    justify-content: center;
 }
 
 .icon-inside {
@@ -9,7 +44,48 @@
     right: 10px;
     top: calc(50% - 12px);
     pointer-events: none;
-    font-size: 16px;
-    font-size: 1.125rem;
+    font-size: 1rem;
     z-index:3;
   }
+
+.content{
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container{
+    width: 100%;
+}
+.card{
+    border-radius: 5px;
+    background-color: #E7E7E7;
+}
+.card-title{
+    font-size: 1.125rem;
+}
+.card-body{
+    height: 186px;
+}
+.card__description{
+    height: 109px;
+}
+.text-truncate{
+    white-space: normal;
+}
+
+.ingredients, .appareils, .ustensils{
+    width: 10rem;
+    position: relative;
+}
+
+.placeholder::placeholder{
+    color: white;
+}
+
+.input-group-lg{
+    position: relative;
+}
+.btn{
+    height: 69px;
+}
