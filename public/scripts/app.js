@@ -1,5 +1,7 @@
+import { Appliances } from "./appliances.js";
 import { Ingredients } from "./ingredients.js";
 import { TagFilter } from "./tagFilter.js";
+import { Ustensils } from "./ustensils.js";
 
 const recipesContainer = document.querySelector(".container");
 
@@ -29,9 +31,9 @@ const putIngredientsInList= ingredients =>{
     let result = `<ul>`;
     for(let i=0; i< ingredients.length; i++){
         if(ingredients[i].quantity!= undefined && ingredients[i].unit != undefined){
-            result+= `<li><span class="h5">${ingredients[i].ingredient}:</span><span class="h6">${ingredients[i].quantity}${ingredients[i].unit}</span></li>`;
+            result+= `<li><span class="h5">${ingredients[i].ingredient}:</span><span class="h6"> ${ingredients[i].quantity}${ingredients[i].unit}</span></li>`;
         } else if(ingredients[i].quantity!= undefined){
-            result+= `<li><span class="h5">${ingredients[i].ingredient}:</span><span class="h6">${ingredients[i].quantity}</span></li>`;
+            result+= `<li><span class="h5">${ingredients[i].ingredient}:</span><span class="h6"> ${ingredients[i].quantity}</span></li>`;
         } else {
             result += `<li><span class="h5">${ingredients[i].ingredient}</span></li>`;
         }
@@ -45,3 +47,5 @@ for(let i=0; i< recipes.length; i++){
 }
 TagFilter.init();
 Ingredients.init();
+Appliances.init();
+Ustensils.init();
