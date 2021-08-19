@@ -10,54 +10,109 @@ export class Ingredients {
                 }
             })
         })
-        /*const container = document.querySelector(".tags");
-        const buttonIngredient = document.createElement("div");
-        buttonIngredient.classList.add("input-group", "mb-3", "ingredients", "rounded");
-        buttonIngredient.innerHTML = `
-            <input type="text" class="form-control bg-primary text-white placeholder" aria-label="Ingrédients" placeholder="Ingrédients">
-            <span class="input-group-text chevron-ingredients bg-primary"><i class="bi bi-chevron-down text-white"></i></span>
-            `;
-        container.appendChild(buttonIngredient);*/
-        new Ingredients(ingredientsList);
+        const container = document.querySelector(".container__inputs");
+        let inputGroupIngredient = document.createElement("div");
+        let inputTextIngredient = document.createElement("input");
+        let spanChevronIngredient = document.createElement("span");
+        inputGroupIngredient.classList.add("input-group", "mb-3", "ingredients", "rounded");
+        container.appendChild(inputGroupIngredient);
+        inputTextIngredient.classList.add("form-control", "bg-primary", "ingredients__text-input", "text-white");
+        inputTextIngredient.setAttribute("type", "text");
+        inputGroupIngredient.appendChild(inputTextIngredient);
+        spanChevronIngredient.classList.add("input-group-text", "bg-primary", "chevron-ingredients", "rounded-right");
+        inputGroupIngredient.appendChild(spanChevronIngredient);
+        let iconChevronDown = document.createElement("i");
+        iconChevronDown.classList.add("bi", "bi-chevron-down", "text-white");
+        spanChevronIngredient.appendChild(iconChevronDown);
+        new Ingredients(ingredientsList, inputGroupIngredient, inputTextIngredient, spanChevronIngredient, iconChevronDown);
     }
 
-    constructor(list){
+    constructor(list, inputGroup, inputText, btnChevron, iconChevron){
         this.list = list;
-        this.element = document.querySelector(".ingredients");
-        document.querySelector(".chevron-ingredients").addEventListener("click", e=>{
-            this.showIngredients(this.list);
+        this.inputGroup = inputGroup;
+        this.inputText = inputText;
+        this.btnChevron = btnChevron;
+        this.iconChevron = iconChevron;
+        this.ul = document.createElement("ul");
+        this.createUstentilsInput();
+    }
+
+    createUstentilsInput = () =>{
+        this.inputText.setAttribute("aria-label", "Ingrédients")
+        this.inputText.setAttribute("placeholder", "Ingrédients");
+        this.iconChevron.classList.add("bi-chevron-down");
+        this.btnChevron.classList.add("chevron-ingredients");
+        this.btnChevron.addEventListener("click", this.createLargeUstentilsInput);
+        this.inputText.addEventListener("input", e =>{
+            this.searchIngredient(e,this.list);
         });
     }
 
-    showIngredients = list =>{
-        this.element.innerHTML = `
-            <input type="text" class="form-control bg-primary text-white placeholder" aria-label="Recherche un ingrédient" placeholder="Recherche un ingrédient" >
-            <span class="input-group-text chevron-ingredients-deployed bg-primary"><i class="bi bi-chevron-up text-white"></i></span>
-        `;
-        this.element.style.width = "667px";
-        document.querySelector(".chevron-ingredients-deployed").addEventListener("click", e=>{
-            this.element.style.width = "10rem";
-            this.element.innerHTML = `
-                <input type="text" class="form-control bg-primary text-white placeholder" aria-label="Ingrédients" placeholder="Ingrédients" >
-                <span class="input-group-text chevron-ingredients bg-primary"><i class="bi bi-chevron-down text-white"></i></span>
-            `;
-            document.querySelector(".chevron-ingredients").addEventListener("click", e=>{
-                this.showIngredients(this.list);
-            });
+    resetIngredientsInput = () =>{
+        this.hideIngredientsList();
+        this.inputGroup.classList.remove("ingredients-lg");
+        this.inputText.setAttribute("aria-label", "Ingrédients")
+        this.inputText.setAttribute("placeholder", "Ingrédients");
+        this.iconChevron.classList.remove("bi-chevron-up");
+        this.btnChevron.classList.remove("chevron-ingredients-deployed");
+        this.iconChevron.classList.add("bi-chevron-down");
+        this.btnChevron.classList.add("chevron-ingredients");
+        this.inputText.value = "";
+        document.removeEventListener("click", this.resetIngredientsInput);
+        this.btnChevron.removeEventListener("click", this.resetIngredientsInput)
+        this.btnChevron.addEventListener("click", this.createLargeUstentilsInput);
+        this.inputText.addEventListener("input", e =>{
+            this.searchIngredient(e,this.list);
         });
-        const ul = document.createElement("ul");
-        ul.classList.add("bg-primary", "ingredients__list");
+    }
+
+    createLargeUstentilsInput = () =>{
+        this.inputGroup.classList.add("ingredients-lg");
+        this.inputText.classList.remove("ingredients__text-input");
+        this.inputText.classList.add("ingredients__text-input-lg");
+        this.inputText.setAttribute("aria-label", "Recherche un ingrédient");
+        this.inputText.setAttribute("placeholder", "Recherche un ingrédient");
+        this.btnChevron.classList.remove("chevron-ingredients");
+        this.btnChevron.classList.add("chevron-ingredients-deployed");
+        this.iconChevron.classList.add("bi-chevron-up");
+        this.iconChevron.classList.remove("bi-chevron-down");
+        this.showIngredientsList(this.list);
+
+        this.btnChevron.addEventListener("click", this.resetIngredientsInput);
+    }
+
+    showIngredientsList = list =>{
+        this.ul.style.display = "flex";
+        this.ul.classList.add("bg-primary", "ingredients__list", "rounded-bottom");
+        this.ul.innerHTML = "";
         list.forEach(ingredient =>{
-            const li = document.createElement("li");
-            li.classList.add("bg-primary", "text-white")
+            let li = document.createElement("li");
+            li.classList.add("bg-primary", "text-white", "ingredient")
             li.innerHTML = ingredient;
-            li.style.width = "222px"
-            li.style.height = "30px"
             li.addEventListener("click", e=>{
                 Tag.init(ingredient,0);
+                this.resetIngredientsInput();
             });
-            ul.appendChild(li);
+            this.ul.appendChild(li);
         })
-        this.element.appendChild(ul);
+        document.addEventListener("click", this.resetIngredientsInput); 
+        this.inputGroup.addEventListener("click", e =>{
+            e.stopPropagation();
+        })
+        this.inputGroup.appendChild(this.ul);
+    }
+
+    hideIngredientsList = () =>{
+        this.ul.style.display = "none";
+    }
+
+    searchIngredient = (e, list) =>{
+        let filter = [];
+        list.forEach(element => {
+            if(element.includes(e.target.value)){
+                filter.push(element);
+            }
+        })
+        this.showIngredientsList(filter);
     }
 }

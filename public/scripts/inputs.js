@@ -1,16 +1,34 @@
-import { Input } from "./inputs.js";
-import { Tag } from "./tag.js";
-
-export class Ustensils{
-    static init(){
+export class Input {
+    static init(type){
+        let ingredientsList = [];
+        let appliancesList = [];
         let ustensilsList = [];
         recipes.forEach(recipe =>{
+            recipe.ingredients.forEach(ingredient =>{
+                if(!ingredientsList.includes(ingredient.ingredient.toLowerCase())){
+                    ingredientsList.push(ingredient.ingredient.toLowerCase());
+                }
+            });
             recipe.ustensils.forEach(ustensil =>{
                 if(!ustensilsList.includes(ustensil.toLowerCase())){
                     ustensilsList.push(ustensil.toLowerCase());
                 }
-            })
-        })
+            });
+            recipes.forEach(recipe =>{
+                if(!appliancesList.includes(recipe.appliance.toLowerCase())){
+                    appliancesList.push(recipe.appliance.toLowerCase());
+                }
+            });
+        });
+        let list = [];
+        switch(type){
+            case "ingredients": {
+                list = ingredientsList;
+                
+            }
+                
+        }
+
         const container = document.querySelector(".container__inputs");
         let inputGroupUstensil = document.createElement("div");
         let inputTextUstensil = document.createElement("input");
@@ -25,7 +43,6 @@ export class Ustensils{
         let iconChevronDown = document.createElement("i");
         iconChevronDown.classList.add("bi", "bi-chevron-down", "text-white");
         spanChevronUstensil.appendChild(iconChevronDown);
-        new Ustensils(ustensilsList, inputGroupUstensil, inputTextUstensil, spanChevronUstensil, iconChevronDown);
     }
 
     constructor(list, inputGroup, inputText, btnChevron, iconChevron){

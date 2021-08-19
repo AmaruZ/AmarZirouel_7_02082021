@@ -1,6 +1,5 @@
 import { Appliances } from "./appliances.js";
 import { Ingredients } from "./ingredients.js";
-import { TagFilter } from "./tagFilter.js";
 import { Ustensils } from "./ustensils.js";
 
 const recipesContainer = document.querySelector(".container");
@@ -45,7 +44,7 @@ const putIngredientsInList= ingredients =>{
 for(let i=0; i< recipes.length; i++){
     displayRecipes(recipes[i]);
 }
-TagFilter.init();
+
 Ingredients.init();
 Appliances.init();
 Ustensils.init();

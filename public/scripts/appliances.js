@@ -8,54 +8,109 @@ export class Appliances {
                 appliancesList.push(recipe.appliance.toLowerCase());
             }
         })
-        /*const container = document.querySelector(".tags");
-        const buttonIngredient = document.createElement("div");
-        buttonIngredient.classList.add("input-group", "mb-3", "ingredients", "rounded");
-        buttonIngredient.innerHTML = `
-            <input type="text" class="form-control bg-primary text-white placeholder" aria-label="Ingrédients" placeholder="Ingrédients">
-            <span class="input-group-text chevron-ingredients bg-primary"><i class="bi bi-chevron-down text-white"></i></span>
-            `;
-        container.appendChild(buttonIngredient);*/
-        new Appliances(appliancesList);
+        const container = document.querySelector(".container__inputs");
+        let inputGroupAppliance = document.createElement("div");
+        let inputTextAppliance = document.createElement("input");
+        let spanChevronAppliance = document.createElement("span");
+        inputGroupAppliance.classList.add("input-group", "mb-3", "appliances", "rounded");
+        container.appendChild(inputGroupAppliance);
+        inputTextAppliance.classList.add("form-control", "bg-success", "appliances__text-input", "text-white");
+        inputTextAppliance.setAttribute("type", "text");
+        inputGroupAppliance.appendChild(inputTextAppliance);
+        spanChevronAppliance.classList.add("input-group-text", "bg-success", "chevron-appliances", "rounded-right");
+        inputGroupAppliance.appendChild(spanChevronAppliance);
+        let iconChevronDown = document.createElement("i");
+        iconChevronDown.classList.add("bi", "bi-chevron-down", "text-white");
+        spanChevronAppliance.appendChild(iconChevronDown);
+        new Appliances(appliancesList, inputGroupAppliance, inputTextAppliance, spanChevronAppliance, iconChevronDown);
     }
 
-    constructor(list){
+    constructor(list, inputGroup, inputText, btnChevron, iconChevron){
         this.list = list;
-        this.element = document.querySelector(".appareils");
-        document.querySelector(".chevron-appareils").addEventListener("click", e=>{
-            this.showAppliances(this.list);
+        this.inputGroup = inputGroup;
+        this.inputText = inputText;
+        this.btnChevron = btnChevron;
+        this.iconChevron = iconChevron;
+        this.ul = document.createElement("ul");
+        this.createUstentilsInput();
+    }
+
+    createUstentilsInput = () =>{
+        this.inputText.setAttribute("aria-label", "Appareils")
+        this.inputText.setAttribute("placeholder", "Appareils");
+        this.iconChevron.classList.add("bi-chevron-down");
+        this.btnChevron.classList.add("chevron-appliances");
+        this.btnChevron.addEventListener("click", this.createLargeUstentilsInput);
+        this.inputText.addEventListener("input", e =>{
+            this.searchAppliance(e,this.list);
         });
     }
 
-    showAppliances = list =>{
-        this.element.innerHTML = `
-            <input type="text" class="form-control bg-success text-white placeholder" aria-label="Recherche un appareil" placeholder="Recherche un appareil" >
-            <span class="input-group-text chevron-appareils-deployed bg-success"><i class="bi bi-chevron-up text-white"></i></span>
-        `;
-        this.element.style.width = "444px";
-        document.querySelector(".chevron-appareils-deployed").addEventListener("click", e=>{
-            this.element.style.width = "10rem";
-            this.element.innerHTML = `
-                <input type="text" class="form-control bg-success text-white placeholder" aria-label="Appareil" placeholder="Appareils" >
-                <span class="input-group-text chevron-appareils bg-success"><i class="bi bi-chevron-down text-white"></i></span>
-            `;
-            document.querySelector(".chevron-appareils").addEventListener("click", e=>{
-                this.showAppliances(this.list);
-            });
+    resetAppliancesInput = () =>{
+        this.hideAppliancesList();
+        this.inputGroup.classList.remove("appliances-lg");
+        this.inputText.setAttribute("aria-label", "Appareils")
+        this.inputText.setAttribute("placeholder", "Appareils");
+        this.iconChevron.classList.remove("bi-chevron-up");
+        this.btnChevron.classList.remove("chevron-appliances-deployed");
+        this.iconChevron.classList.add("bi-chevron-down");
+        this.btnChevron.classList.add("chevron-appliances");
+        this.inputText.value = "";
+        document.removeEventListener("click", this.resetAppliancesInput);
+        this.btnChevron.removeEventListener("click", this.resetAppliancesInput)
+        this.btnChevron.addEventListener("click", this.createLargeUstentilsInput);
+        this.inputText.addEventListener("input", e =>{
+            this.searchAppliance(e,this.list);
         });
-        const ul = document.createElement("ul");
-        ul.classList.add("bg-success", "appliances__list");
+    }
+
+    createLargeUstentilsInput = () =>{
+        this.inputGroup.classList.add("appliances-lg");
+        this.inputText.classList.remove("appliances__text-input");
+        this.inputText.classList.add("appliances__text-input-lg");
+        this.inputText.setAttribute("aria-label", "Recherche un appareil");
+        this.inputText.setAttribute("placeholder", "Recherche un appareil");
+        this.btnChevron.classList.remove("chevron-appliances");
+        this.btnChevron.classList.add("chevron-appliances-deployed");
+        this.iconChevron.classList.add("bi-chevron-up");
+        this.iconChevron.classList.remove("bi-chevron-down");
+        this.showAppliancesList(this.list);
+
+        this.btnChevron.addEventListener("click", this.resetAppliancesInput);
+    }
+
+    showAppliancesList = list =>{
+        this.ul.style.display = "flex";
+        this.ul.classList.add("bg-success", "appliances__list", "rounded-bottom");
+        this.ul.innerHTML = "";
         list.forEach(appliance =>{
-            const li = document.createElement("li");
-            li.classList.add("bg-success", "text-white")
+            let li = document.createElement("li");
+            li.classList.add("bg-success", "text-white", "appliance")
             li.innerHTML = appliance;
-            li.style.width = "222px"
-            li.style.height = "30px"
             li.addEventListener("click", e=>{
                 Tag.init(appliance,1);
+                this.resetAppliancesInput();
             });
-            ul.appendChild(li);
+            this.ul.appendChild(li);
         })
-        this.element.appendChild(ul);
+        document.addEventListener("click", this.resetAppliancesInput); 
+        this.inputGroup.addEventListener("click", e =>{
+            e.stopPropagation();
+        })
+        this.inputGroup.appendChild(this.ul);
+    }
+
+    hideAppliancesList = () =>{
+        this.ul.style.display = "none";
+    }
+
+    searchAppliance = (e, list) =>{
+        let filter = [];
+        list.forEach(element => {
+            if(element.includes(e.target.value)){
+                filter.push(element);
+            }
+        })
+        this.showAppliancesList(filter);
     }
 }

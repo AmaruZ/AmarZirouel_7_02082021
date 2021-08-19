@@ -30,9 +30,6 @@ ul{
     list-style-type: none;
     padding: 0;
 }
-.bg-green{
-    background-color: #68D9A4;
-}
 
 .header{
     display: flex;
@@ -70,11 +67,9 @@ ul{
 .card__description{
     height: 109px;
 }
-.text-truncate{
-    white-space: normal;
-}
 
-.ingredients, .appareils, .ustensils{
+
+.ingredients, .appliances, .ustensils{
     width: 10rem;
     position: relative;
 }
@@ -86,6 +81,7 @@ ul{
 .input-group-lg{
     position: relative;
 }
+
 .btn{
     height: 69px;
 }
@@ -100,7 +96,7 @@ ul{
     top: 69px;
     color: white;
     height: 328px;
-    width: 667px;
+    width: 100%;
     z-index: 4;
     display: flex;
     flex-wrap: wrap;

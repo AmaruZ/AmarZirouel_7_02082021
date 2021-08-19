@@ -1,5 +1,4 @@
 import { displayRecipes, flushRecipesInDOM } from "./app.js";
-import { TagFilter } from "./tagFilter.js";
 
 export class Tag{
 
@@ -10,14 +9,14 @@ export class Tag{
     constructor(tag, type){
         this.tag = tag;
         this.type = type;
-        this.container = document.querySelector(".filters");
+        this.container = document.querySelector(".container__tags");
         this.addTag();
 
     }
 
     addTag = () =>{
         const element = document.createElement("span");
-        element.classList.add("text-white","p-2","rounded", "m-2", "tag");
+        element.classList.add("text-white","rounded", "tag");
         switch(this.type){
             case 0: element.classList.add("bg-primary");
             break;
@@ -26,7 +25,7 @@ export class Tag{
             case 2: element.classList.add("bg-danger");
             break; 
         }
-        element.innerHTML = `${this.tag}<i class="bi bi-x-circle"></i>`;
+        element.innerHTML = `<span class="tag__text">${this.tag}</span><i class="bi bi-x-circle"></i>`;
         this.container.appendChild(element);
         this.filterByTags();
         element.addEventListener("click", e =>{
@@ -77,7 +76,6 @@ export class Tag{
                     })
                 }
                 recipeFiltered = recipeFilter;
-                console.log(recipeFiltered)
                 flushRecipesInDOM();
                 recipeFiltered.forEach(recipe => displayRecipes(recipe));
             })
