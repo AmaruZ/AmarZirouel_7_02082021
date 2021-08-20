@@ -1,5 +1,6 @@
 import { Appliances } from "./appliances.js";
 import { Ingredients } from "./ingredients.js";
+import { Search } from "./search.js";
 import { Ustensils } from "./ustensils.js";
 
 const recipesContainer = document.querySelector(".container");
@@ -7,6 +8,13 @@ const recipesContainer = document.querySelector(".container");
 export const flushRecipesInDOM =() =>{
     recipesContainer.innerHTML = ``;
 }
+
+export const displayAllRecipes = () =>{
+    for(let i=0; i< recipes.length; i++){
+        displayRecipes(recipes[i]);
+    }
+}
+
 export const displayRecipes = recipe =>{
         recipesContainer.innerHTML += `     
             <article class="col-12 col-md-6 col-lg-4 g-3 mb-2">
@@ -41,10 +49,8 @@ const putIngredientsInList= ingredients =>{
     return result;
 }
 
-for(let i=0; i< recipes.length; i++){
-    displayRecipes(recipes[i]);
-}
-
+displayAllRecipes();
+export let test = new Search();
 Ingredients.init();
 Appliances.init();
 Ustensils.init();

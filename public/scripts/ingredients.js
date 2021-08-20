@@ -33,6 +33,7 @@ export class Ingredients {
         this.inputText = inputText;
         this.btnChevron = btnChevron;
         this.iconChevron = iconChevron;
+        this.containerList = document.createElement("div")
         this.ul = document.createElement("ul");
         this.createUstentilsInput();
     }
