@@ -1,4 +1,3 @@
-import { displayRecipes, flushRecipesInDOM } from "./app.js";
 
 export class Tag{
 

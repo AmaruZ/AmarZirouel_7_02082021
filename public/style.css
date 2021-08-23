@@ -8860,8 +8860,14 @@ ul {
   z-index: 4;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  flex-wrap: wrap;
   overflow: hidden;
+}
+.ingredients__ul, .appliances__ul, .ustensils__ul {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: fit-content;
+  height: -moz-max-content;
 }
 .ingredients__text-input, .appliances__text-input, .ustensils__text-input {
   border-right: none;

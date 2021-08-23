@@ -1,60 +1,52 @@
-import { displayAllRecipes, displayRecipes, flushRecipesInDOM } from "./app.js";
+import { Recipe } from "./recipe.js";
+
 
 export class Search{
 
     constructor(){
         this.inputText = document.querySelector(".search-input");
-        this.list = recipes;
-        this.setList = function(list) { _list = list;}
-        this.getList = function() {return _list;}
+        this.list = Recipe.allRecipes;        
         this.inputText.addEventListener("input", e =>{
             this.searchRecipe(e);
         });
     }
 
+    get actualList() {
+        return this.list;
+    }
+
+    set actualList(list){
+        this.list = list;
+    }
+
     searchRecipe = (event)=>{
         if(event.target.value.length >= 3){
-            let list = recipes;
+            let list = Recipe.allRecipes;
             this.list = [];
-            flushRecipesInDOM();
+            Recipe.flushRecipesInDOM();
             list.forEach(recipe => {
                 if(recipe.name.toLowerCase().includes(event.target.value.toLowerCase()) || recipe.description.toLowerCase().includes(event.target.value.toLowerCase())){
                     this.list.push(recipe);
-                    displayRecipes(recipe);
+                    Recipe.displayRecipe(recipe);
                 } else {
                     recipe.ingredients.forEach(ingredient =>{
                         if(ingredient.ingredient.includes(event.target.value)){
                             this.list.push(recipe);
-                            displayRecipes(recipe);
+                            Recipe.displayRecipe(recipe);
                         }
                     })
                 }
                 
             })
         } else{
-            this.list = recipes;
-            flushRecipesInDOM();
-            displayAllRecipes();
+            this.list = Recipe.allRecipes;
+            Recipe.flushRecipesInDOM();
+            Recipe.displayAllRecipes();
         }
         if(this.list.length === 0){
-            this.displayNoRecipes();
+            Recipe.displayNoRecipes();
         }
-
     }
-
-    displayNoRecipes = () =>{
-        const container = document.querySelector(".container");
-        container.innerHTML=`
-                            <p> Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>
-                            
-                            `
-    }
-
-
-    get recipesList(){
-        return this.list;
-    }
-
 
 
 }
