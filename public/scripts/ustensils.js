@@ -4,16 +4,6 @@ import { Search } from "./search.js";
 import { Tag } from "./tag.js";
 
 export class Ustensils extends Input{
-    static init(){
-        let ustensilsList = [];
-        recipes.forEach(recipe =>{
-            recipe.ustensils.forEach(ustensil =>{
-                if(!ustensilsList.includes(ustensil.toLowerCase())){
-                    ustensilsList.push(ustensil.toLowerCase());
-                }
-            })
-        })
-    }
 
     constructor(){
         super("Ustensile", "ustensil", "bg-danger");

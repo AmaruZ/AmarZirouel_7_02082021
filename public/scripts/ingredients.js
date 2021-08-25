@@ -1,19 +1,7 @@
 import { search } from "./app.js";
 import { Input } from "./inputs.js";
-import { Search } from "./search.js";
-import { Tag } from "./tag.js";
 
 export class Ingredients extends Input{
-    static init(){
-        let ingredientsList = [];
-        recipes.forEach(recipe =>{
-            recipe.ingredients.forEach(ingredient =>{
-                if(!ingredientsList.includes(ingredient.ingredient.toLowerCase())){
-                    ingredientsList.push(ingredient.ingredient.toLowerCase());
-                }
-            })
-        })
-    }
 
     constructor(){
         super("Ingrédient", "ingredient", "bg-primary");

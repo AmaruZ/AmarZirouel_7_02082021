@@ -1,3 +1,6 @@
+import { search } from "./app.js";
+import { Tag } from "./tag.js";
+
 export class Input {
     static init(type){
         let ingredientsList = [];
@@ -58,7 +61,11 @@ export class Input {
         this.spanChevron.addEventListener(`click`, this.switchToLargeInput);
         this.createDropdown();
         this.inputText.addEventListener(`input`, e =>{
-             this.searchElement(e);
+            if(e.target.value.length > 0){
+                this.searchElement(e);
+            } else {
+                this.hideList();
+            }
          });
     }
 
@@ -77,7 +84,10 @@ export class Input {
         document.addEventListener(`click`, this.switchToSmallInput);
         this.inputGroup.addEventListener("click", e =>{
             e.stopPropagation();
-        })
+        });
+        this.inputText.addEventListener(`input`, e =>{
+            this.searchElement(e);
+         });
         this.spanChevron.addEventListener(`click`, this.switchToSmallInput);
     }
 
@@ -95,8 +105,12 @@ export class Input {
         this.spanChevron.removeEventListener(`click`, this.switchToSmallInput)
         this.spanChevron.addEventListener(`click`, this.switchToLargeInput);
         this.inputText.addEventListener(`input`, e =>{
-            this.searchElement(e);
-        });
+            if(e.target.value.length > 0){
+                this.searchElement(e);
+            } else {
+                this.hideList();
+            }
+         });
     }
 
     createDropdown = () => {
@@ -115,6 +129,9 @@ export class Input {
             li.classList.add(`${this.background}`, `${this.type}`, `text-white`);
             li.innerHTML = element;
             this.ul.appendChild(li);
+            li.addEventListener("click", e =>{
+                search.addTag(this.type, element);
+            });
         })
     }
 

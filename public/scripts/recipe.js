@@ -12,7 +12,7 @@ export class Recipe {
     }
 
     static displayRecipes = recipeList =>{
-        for(let i=0; i<recipeList; i++){
+        for(let i=0; i<recipeList.length; i++){
             this.displayRecipe(recipeList[i]);
         }
     }

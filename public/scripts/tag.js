@@ -1,9 +1,7 @@
+import { search } from "./app.js";
+import { Recipe } from "./recipe.js";
 
 export class Tag{
-
-    static init(tag, type){
-        new Tag(tag,type);
-    }
 
     constructor(tag, type){
         this.tag = tag;
@@ -13,39 +11,44 @@ export class Tag{
 
     }
 
+    get tagName(){
+        return this.tag;
+    }
+
     addTag = () =>{
-        const element = document.createElement("span");
-        element.classList.add("text-white","rounded", "tag");
+        const btnTag = document.createElement("span");
+        btnTag.classList.add("text-white","rounded", "tag");
         switch(this.type){
-            case 0: element.classList.add("bg-primary");
+            case "ingredient": btnTag.classList.add("bg-primary");
             break;
-            case 1: element.classList.add("bg-success");
+            case "appliance": btnTag.classList.add("bg-success");
             break;
-            case 2: element.classList.add("bg-danger");
+            case "ustensil": btnTag.classList.add("bg-danger");
             break; 
         }
-        element.innerHTML = `<span class="tag__text">${this.tag}</span><i class="bi bi-x-circle"></i>`;
-        this.container.appendChild(element);
-        this.filterByTags();
-        element.addEventListener("click", e =>{
-            this.deleteTag(element);
+        btnTag.innerHTML = `<span class="tag__text">${this.tag}</span><i class="bi bi-x-circle"></i>`;
+        this.container.appendChild(btnTag);
+        //this.filterByTags();
+        btnTag.addEventListener("click", e =>{
+            this.deleteTag(btnTag);
         });
     }
 
     deleteTag = tag =>{
         this.container.removeChild(tag);
-        this.filterByTags();
+        search.deleteTag(this.type, this.tag);
+        //search.filterTag();
+
+        //this.filterByTags();
     }
 
     filterByTags = () =>{
-        let recipeFiltered = recipes;
+        let recipeFiltered = search.actualList;
         
         const tags = this.container.querySelectorAll(".tag");
         if(tags.length == 0) {
-            flushRecipesInDOM();
-            for(let i=0; i< recipes.length; i++){
-                displayRecipes(recipes[i]);
-            }
+            Recipe.flushRecipesInDOM();
+            Recipe.displayAllRecipes();
         } else {
             tags.forEach(tag =>{
                 let recipeFilter = [];
@@ -75,8 +78,9 @@ export class Tag{
                     })
                 }
                 recipeFiltered = recipeFilter;
-                flushRecipesInDOM();
-                recipeFiltered.forEach(recipe => displayRecipes(recipe));
+                Recipe.flushRecipesInDOM();
+                search.actualList = recipeFiltered;
+                recipeFiltered.forEach(recipe => Recipe.displayRecipe(recipe));
             })
         }
         
