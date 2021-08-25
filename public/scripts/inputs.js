@@ -1,37 +1,7 @@
 import { search } from "./app.js";
-import { Tag } from "./tag.js";
+
 
 export class Input {
-    static init(type){
-        let ingredientsList = [];
-        let appliancesList = [];
-        let ustensilsList = [];
-        recipes.forEach(recipe =>{
-            recipe.ingredients.forEach(ingredient =>{
-                if(!ingredientsList.includes(ingredient.ingredient.toLowerCase())){
-                    ingredientsList.push(ingredient.ingredient.toLowerCase());
-                }
-            });
-            recipe.ustensils.forEach(ustensil =>{
-                if(!ustensilsList.includes(ustensil.toLowerCase())){
-                    ustensilsList.push(ustensil.toLowerCase());
-                }
-            });
-            recipes.forEach(recipe =>{
-                if(!appliancesList.includes(recipe.appliance.toLowerCase())){
-                    appliancesList.push(recipe.appliance.toLowerCase());
-                }
-            });
-        });
-        let list = [];
-        switch(type){
-            case `ingredients`: {
-                list = ingredientsList;
-                
-            }
-                
-        }
-    }
 
     constructor(name, type, background){
         this.name = name;
@@ -131,6 +101,7 @@ export class Input {
             this.ul.appendChild(li);
             li.addEventListener("click", e =>{
                 search.addTag(this.type, element);
+                this.createList(this.refreshList());
             });
         })
     }

@@ -38,13 +38,11 @@ export class Tag{
         this.container.removeChild(tag);
         search.deleteTag(this.type, this.tag);
         //search.filterTag();
-
         //this.filterByTags();
     }
 
     filterByTags = () =>{
         let recipeFiltered = search.actualList;
-        
         const tags = this.container.querySelectorAll(".tag");
         if(tags.length == 0) {
             Recipe.flushRecipesInDOM();

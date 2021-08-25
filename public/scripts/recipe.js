@@ -2,7 +2,7 @@ export class Recipe {
 
 
     static get allRecipes(){
-        return recipes;
+        return [...recipes];
     }
 
     static displayAllRecipes = () =>{
