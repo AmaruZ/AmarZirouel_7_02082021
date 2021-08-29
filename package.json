@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sass": "sass --watch sass/style.scss:public/style.css"
+    "sass": "sass --watch sass/style.scss:public/style.css sass/bootstrap/scss/bootstrap.scss:public/bootstrap.css"
   },
   "repository": {
     "type": "git",
