@@ -70,34 +70,34 @@ export class Search{
     }
 
     filterTag(){
-        //this.list = Recipe.allRecipes;
 
-        //this.index++;
         if(this.tags.length != 0){
                 for(const tag of this.tags){
                     let allRecipes = [...this.list[this.index]];
                     this.list[this.index] = [];
+                    console.log(tag)
                     for(const recipe of allRecipes){
                         switch(tag.type){
                             case "ingredient":{
                                 recipe.ingredients.forEach(ingredient => {
-                                    if(ingredient.ingredient.toLowerCase().match(tag.name)){
+                                    if(ingredient.ingredient.toLowerCase().includes(tag.name) && !this.list[this.index].includes(recipe)){
                                         this.list[this.index].push(recipe);
+                                        
                                     }
                                 });
                             }
                             break;
-                            case "appliance": if(recipe.appliance.toLowerCase().match(tag.name)) this.list[this.index].push(recipe);
+                            case "appliance": if(recipe.appliance.toLowerCase().match(tag.name) && !this.list[this.index].includes(recipe)) this.list[this.index].push(recipe);
                             break;
                             case "ustensil": {
                                 recipe.ustensils.forEach(ustensil =>{
-                                    if(ustensil.toLowerCase().match(tag.name)) this.list[this.index].push(recipe);
+                                    if(ustensil.toLowerCase().match(tag.name) && !this.list[this.index].includes(recipe)) this.list[this.index].push(recipe);
                                 });
                             }
+                            break;
                         }
                         
                     }
-                    allRecipes = [...this.list[this.index]];
                 }
             }
             Recipe.flushRecipesInDOM();
