@@ -19,7 +19,7 @@ export class Recipe {
 
     static displayRecipe = recipe => {
         document.querySelector(".container").innerHTML += `     
-        <article class="col-12 col-md-6 col-lg-4 g-3 mb-2">
+        <article class="col-12 col-md-6 col-lg-4 gx-5 gy-4 mb-2">
             <div class="card p-0">
                     <svg class="bd-placeholder-img card-img-top" width="100%" height="178" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#C7BEBE"></rect></svg>
                     <div class="card-body row g-0">
@@ -45,7 +45,15 @@ export class Recipe {
         let result = `<ul>`;
         for(let i=0; i< ingredients.length; i++){
             if(ingredients[i].quantity!= undefined && ingredients[i].unit != undefined){
-                result+= `<li><span class="h5">${ingredients[i].ingredient}:</span><span class="h6"> ${ingredients[i].quantity}${ingredients[i].unit}</span></li>`;
+                result+= `<li><span class="h5">${ingredients[i].ingredient}:</span><span class="h6"> ${ingredients[i].quantity}`
+                switch(ingredients[i].unit){
+                    case "grammes": result+= `g</span></li>`;
+                    break;
+                    case "cuillères à soupe": result+= ` c.a.s</span></li>`;
+                    break;
+                    default: result+= ` ${ingredients[i].unit}</span></li>`;
+                    break;
+                }
             } else if(ingredients[i].quantity!= undefined){
                 result+= `<li><span class="h5">${ingredients[i].ingredient}:</span><span class="h6"> ${ingredients[i].quantity}</span></li>`;
             } else {

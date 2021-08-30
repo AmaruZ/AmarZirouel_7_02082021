@@ -449,12 +449,12 @@ const recipes = [
             {
                 "ingredient": "Vinaigre de cidre",
                 "quantity": 1,
-                "unit":"cuillère à soupe"
+                "unit":"cuillères à soupe"
             },
             {
                 "ingredient": "huile d'olive",
                 "quantity": 2,
-                "unit": "cuillère à soupe"
+                "unit": "cuillères à soupe"
             }
         ],
         "time":40,
@@ -569,7 +569,7 @@ const recipes = [
             {
                 "ingredient": "huile d'olives",
                 "quantity": 2,
-                "unit": "cuillère à soupe"
+                "unit": "cuillères à soupe"
             }
         ],
         "time": 45,
@@ -939,7 +939,7 @@ const recipes = [
             {
                 "ingredient": "Crème fraîche",
                 "quantity": 4,
-                "unit": "cuillère à soupe"
+                "unit": "cuillères à soupe"
             },
             {
                 "ingredient": "Vermicelles",

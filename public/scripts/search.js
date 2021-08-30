@@ -114,7 +114,8 @@ export class Search{
 
     deleteTag(type, name){
         for(let i = this.tags.length - 1; i>=0; i--){
-            if(this.tags[i].name.match(name) && this.tags[i].type.match(type)){
+            console.log(name,this.tags[i].name)
+            if(this.tags[i].name == name && this.tags[i].type.match(type)){
                 this.tags.splice(i,1);
             }
         }
