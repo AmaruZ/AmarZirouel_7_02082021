@@ -22,7 +22,7 @@ export class Search{
     }
 
     searchRecipe = (inputTextValue)=>{
-        
+        //console.time("algo 1: ");
         if(inputTextValue.length >= 3){
             this.filterTag();
             let list = [...this.list];
@@ -43,18 +43,16 @@ export class Search{
             }
         } else{
             this.filterTag();
-            //Recipe.flushRecipesInDOM();
-            //Recipe.displayRecipes(this.list);
         }
         if(this.list.length === 0){
             Recipe.displayNoRecipes();
         }
+        //console.timeEnd("algo 1: ")
     }
 
-    refreshList(){
-
-        console.log(document.querySelector(".search-input").value);
-    }
+    // refreshList(){
+    //     console.log(document.querySelector(".search-input").value);
+    // }
 
     filterTag(){
         this.list = Recipe.allRecipes;
@@ -96,12 +94,11 @@ export class Search{
 
     deleteTag(type, name){
         for(let i = this.tags.length - 1; i>=0; i--){
-            if(this.tags[i].name.match(name) && this.tags[i].type.match(type)){
+            if(this.tags[i].name == name && this.tags[i].type.match(type)){
                 this.tags.splice(i,1);
             }
         }
         this.searchRecipe(this.inputText.value);
     }
     
-
 }

@@ -54,8 +54,13 @@ ul {
   cursor: pointer;
 }
 
+.search-input {
+  background: #E7E7E7;
+}
+
 .ingredients, .appliances, .ustensils {
   width: 10rem;
+  min-width: 10rem;
   position: relative;
   border-right: none;
 }
