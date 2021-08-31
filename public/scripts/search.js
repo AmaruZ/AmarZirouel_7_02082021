@@ -1,3 +1,4 @@
+import { Ingredients } from "./ingredients.js";
 import { Recipe } from "./recipe.js";
 import { Tag } from "./tag.js";
 
@@ -13,6 +14,7 @@ export class Search{
         this.inputText.addEventListener("input", e =>{
             this.searchRecipe(e.target.value);
         });
+        console.log(Ingredients.getallIngredients());
     }
 
     get actualList() {
@@ -24,24 +26,22 @@ export class Search{
     }
 
     searchRecipe = (inputTextValue)=>{
-        
+        console.time("algo 2: ");
         if(inputTextValue.length >= 3){
             if(this.textLength < inputTextValue.length){
                 this.index++;
             } else if (this.textLength > inputTextValue.length) this.index--;
             this.textLength = inputTextValue.length;
-            console.log(this.index)
-
             let list = [...this.list[this.index-1]];
             this.list[this.index] = [];
             Recipe.flushRecipesInDOM();
             for(const recipe of list){
                 if(recipe.name.toLowerCase().includes(inputTextValue.toLowerCase()) || recipe.description.toLowerCase().includes(inputTextValue.toLowerCase())){ 
                         this.list[this.index].push(recipe);
-                        // Recipe.displayRecipe(recipe);
                 } else {
                     for(const ingredient of recipe.ingredients){
-                        if(ingredient.ingredient.includes(inputTextValue)){
+                        if(ingredient.ingredient.toLowerCase().includes(inputTextValue.toLowerCase())){
+                            console.log("oui")
                             this.list[this.index].push(recipe);
                             Recipe.displayRecipe(recipe);
                         }
@@ -55,19 +55,16 @@ export class Search{
             this.index=0;
             this.filterTag();
             Recipe.displayRecipes(this.list[this.index])
-            
-            //Recipe.flushRecipesInDOM();
-            //Recipe.displayRecipes(this.list);
         }
         if(this.list[this.index].length === 0){
             Recipe.displayNoRecipes();
         }
+        console.timeEnd("algo 2: ");
     }
 
-    refreshList(){
-
-        console.log(document.querySelector(".search-input").value);
-    }
+    // refreshList(){
+    //     console.log(document.querySelector(".search-input").value);
+    // }
 
     filterTag(){
 
@@ -75,7 +72,6 @@ export class Search{
                 for(const tag of this.tags){
                     let allRecipes = [...this.list[this.index]];
                     this.list[this.index] = [];
-                    console.log(tag)
                     for(const recipe of allRecipes){
                         switch(tag.type){
                             case "ingredient":{
@@ -101,9 +97,6 @@ export class Search{
                 }
             }
             Recipe.flushRecipesInDOM();
-            
-            console.log(this.list,this.index)
-            //Recipe.displayRecipes(this.list[this.index]);
         }
 
     addTag(type, name){
@@ -114,7 +107,6 @@ export class Search{
 
     deleteTag(type, name){
         for(let i = this.tags.length - 1; i>=0; i--){
-            console.log(name,this.tags[i].name)
             if(this.tags[i].name == name && this.tags[i].type.match(type)){
                 this.tags.splice(i,1);
             }

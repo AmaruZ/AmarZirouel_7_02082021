@@ -18,5 +18,27 @@ export class Ingredients extends Input{
         }
         return refreshedList;
     }
+    static getallIngredients(){
+        let ingredients = [];
+        let include = false;
+        for(let i = recipes.length-1; i>0; i--){
+
+            include = false;
+            for(let ingredient of recipes[i].ingredients){
+                ingredients.forEach(element =>{
+                    if(element.name == ingredient.ingredient){
+                        include = true;
+                        console.log(ingredients)
+                        ingredients[ingredients.indexOf(element)].ids += `,${recipes[i].id}`;
+                    }
+                });
+                if(include == false) ingredients.push({name: ingredient.ingredient, ids: `${recipes[i].id}`});
+                include = false;
+            }
+        }
+        return ingredients;
+    }
+
+
 
 }
