@@ -13,7 +13,7 @@
         <h1><img src="images/logo.svg" alt="Les petits plats" class="header__logo"></h1>
     </header>
     <main class="content">
-        <section class="search-group">
+        <div class="search-group">
             <div class="input-group-lg">
                 <input type="text" class="form-control rounded search-input" placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette" />
                 <span class="icon-inside"><i class="bi bi-search"></i></span>
@@ -21,16 +21,16 @@
             <div class="container__tags mt-4 mb-4"></div>
             <div class="container__inputs d-flex gap-4 tags">
             </div>
-        </section>
+        </div>
 
-        <section>
+        <div>
             <div class="container row mw-100 p-0"></div>
-        </section>
+        </div>
     </main>
-    
+    <script src="scripts/recipes.js"></script>
+    <script src="scripts/app.js" type="module"></script>
+    <script src="../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
-<script src="scripts/recipes.js"></script>
-<script src="scripts/app.js" type="module"></script>
-<script src="../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
-<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
 </html>
