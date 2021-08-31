@@ -64,17 +64,17 @@ export class Search{
                         switch(tag.type){
                             case "ingredient":{
                                 recipe.ingredients.forEach(ingredient => {
-                                    if(ingredient.ingredient.toLowerCase().match(tag.name)){
+                                    if(ingredient.ingredient.toLowerCase() == tag.name){
                                         this.list.push(recipe);
                                     }
                                 });
                             }
                             break;
-                            case "appliance": if(recipe.appliance.toLowerCase().match(tag.name)) this.list.push(recipe);
+                            case "appliance": if(recipe.appliance.toLowerCase() == tag.name) this.list.push(recipe);
                             break;
                             case "ustensil": {
                                 recipe.ustensils.forEach(ustensil =>{
-                                    if(ustensil.toLowerCase().match(tag.name)) this.list.push(recipe);
+                                    if(ustensil.toLowerCase() == tag.name) this.list.push(recipe);
                                 });
                             }
                         }
