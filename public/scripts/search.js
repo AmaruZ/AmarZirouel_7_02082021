@@ -22,8 +22,8 @@ export class Search{
     }
 
     searchRecipe = (inputTextValue)=>{
-        //console.time("algo 1: ");
         if(inputTextValue.length >= 3){
+            console.time("algo 1: ");
             this.filterTag();
             let list = [...this.list];
             this.list = [];
@@ -41,13 +41,13 @@ export class Search{
                     }
                 }
             }
+            console.timeEnd("algo 1: ")
         } else{
             this.filterTag();
         }
         if(this.list.length === 0){
             Recipe.displayNoRecipes();
         }
-        //console.timeEnd("algo 1: ")
     }
 
     // refreshList(){
