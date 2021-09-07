@@ -40,7 +40,7 @@ export class Search{
                         this.list[this.index].push(recipe);
                 } else {
                     for(const ingredient of recipe.ingredients){
-                        if(ingredient.ingredient.toLowerCase().includes(inputTextValue.toLowerCase()) && !this.list[this.index].includes(recipe)){
+                        if(ingredient.ingredient.toLowerCase().replace(/ /g,'').includes(inputTextValue.toLowerCase().replace(/ /g,'')) && !this.list[this.index].includes(recipe)){
                             this.list[this.index].push(recipe);
                             Recipe.displayRecipe(recipe);
                         }
@@ -55,17 +55,11 @@ export class Search{
             this.index=0;
             this.filterTag();
             Recipe.displayRecipes(this.list[this.index])
-            
         }
         if(this.list[this.index].length === 0){
             Recipe.displayNoRecipes();
         }
-        
     }
-
-    // refreshList(){
-    //     console.log(document.querySelector(".search-input").value);
-    // }
 
     filterTag(){
         if(this.tags.length != 0){
@@ -92,7 +86,6 @@ export class Search{
                             }
                             break;
                         }
-                        
                     }
                 }
             }

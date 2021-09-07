@@ -18,5 +18,4 @@ export class Ingredients extends Input{
         }
         return refreshedList;
     }
-
 }

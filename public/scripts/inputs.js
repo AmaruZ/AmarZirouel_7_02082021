@@ -84,7 +84,6 @@ export class Input {
     }
 
     createDropdown = () => {
-        
         this.dropdown.classList.add(this.background, `${this.type}s__list`, `rounded-bottom`);
         this.dropdown.style.display = "none";
         this.inputGroup.appendChild(this.dropdown);
@@ -103,7 +102,7 @@ export class Input {
                 search.addTag(this.type, element);
                 this.createList(this.refreshList());
             });
-        })
+        });
     }
 
     showList = (list) => {
@@ -118,13 +117,11 @@ export class Input {
             if(element.includes(e.target.value)){
                 filter.push(element);
             }
-        })
+        });
         this.showList(filter);
     }
-
 
     hideList = () =>{
         this.dropdown.style.display = "none";
     }
-
 }
