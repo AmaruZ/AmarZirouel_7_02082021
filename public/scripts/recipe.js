@@ -31,8 +31,7 @@ export class Recipe {
                         <p class="card-text col card__description text-truncate h6">${recipe.description}</p>
                     </div>
             </div>
-        </article>
-                                    `;
+        </article>`;
     }
 
     static displayNoRecipes = () =>{

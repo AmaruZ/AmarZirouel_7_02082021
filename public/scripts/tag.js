@@ -8,7 +8,6 @@ export class Tag{
         this.type = type;
         this.container = document.querySelector(".container__tags");
         this.addTag();
-
     }
 
     get tagName(){
@@ -28,7 +27,6 @@ export class Tag{
         }
         btnTag.innerHTML = `<span class="tag__text">${this.tag}</span><i class="bi bi-x-circle"></i>`;
         this.container.appendChild(btnTag);
-        //this.filterByTags();
         btnTag.addEventListener("click", e =>{
             this.deleteTag(btnTag);
         });
@@ -37,8 +35,6 @@ export class Tag{
     deleteTag = tag =>{
         this.container.removeChild(tag);
         search.deleteTag(this.type, this.tag);
-        //search.filterTag();
-        //this.filterByTags();
     }
 
     filterByTags = () =>{
@@ -56,15 +52,15 @@ export class Tag{
                             if(ingredient.ingredient.toLowerCase().match(tag.innerText)){
                                 recipeFilter.push(recipe);
                             }
-                        })
-                    })
+                        });
+                    });
                 }
                 if(tag.classList.contains("bg-success")){
                     recipeFiltered.forEach(recipe =>{
                         if(recipe.appliance.toLowerCase().match(tag.innerText)){
                             recipeFilter.push(recipe);
                         }
-                    })
+                    });
                 }
                 if(tag.classList.contains("bg-danger")){
                     recipeFiltered.forEach(recipe =>{
@@ -72,15 +68,14 @@ export class Tag{
                             if(ustensil.toLowerCase().match(tag.innerText)){
                                 recipeFilter.push(recipe);
                             }
-                        })
-                    })
+                        });
+                    });
                 }
                 recipeFiltered = recipeFilter;
                 Recipe.flushRecipesInDOM();
                 search.actualList = recipeFiltered;
                 recipeFiltered.forEach(recipe => Recipe.displayRecipe(recipe));
-            })
+            });
         }
-        
     }
 }

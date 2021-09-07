@@ -1,7 +1,5 @@
 import { search } from "./app.js";
 import { Input } from "./inputs.js";
-import { Search } from "./search.js";
-import { Tag } from "./tag.js";
 
 export class Ustensils extends Input{
 

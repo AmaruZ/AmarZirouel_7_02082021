@@ -23,7 +23,6 @@ export class Search{
 
     searchRecipe = (inputTextValue)=>{
         if(inputTextValue.length >= 3){
-            console.time("algo 1: ");
             this.filterTag();
             let list = [...this.list];
             this.list = [];
@@ -41,7 +40,6 @@ export class Search{
                     }
                 }
             }
-            console.timeEnd("algo 1: ")
         } else{
             this.filterTag();
         }
@@ -49,10 +47,6 @@ export class Search{
             Recipe.displayNoRecipes();
         }
     }
-
-    // refreshList(){
-    //     console.log(document.querySelector(".search-input").value);
-    // }
 
     filterTag(){
         this.list = Recipe.allRecipes;
@@ -100,5 +94,4 @@ export class Search{
         }
         this.searchRecipe(this.inputText.value);
     }
-    
 }
