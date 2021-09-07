@@ -33,7 +33,7 @@ export class Search{
                         Recipe.displayRecipe(recipe);
                 } else {
                     for(const ingredient of recipe.ingredients){
-                        if(ingredient.ingredient.toLowerCase().replace(/ /g,'').includes(inputTextValue.toLowerCase().replace(/ /g,''))){
+                        if(ingredient.ingredient.toLowerCase().replace(/ /g,'').includes(inputTextValue.toLowerCase().replace(/ /g,'')) && !this.list.includes(recipe)){
                             this.list.push(recipe);
                             Recipe.displayRecipe(recipe);
                         }
