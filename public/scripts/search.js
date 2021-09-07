@@ -26,7 +26,6 @@ export class Search{
     searchRecipe = (inputTextValue)=>{
         
         if(inputTextValue.length >= 3){
-            console.time("algo 2: ");
             if(this.textLength < inputTextValue.length){
                 this.index++;
             } else if (this.textLength > inputTextValue.length) this.index--;
@@ -48,8 +47,7 @@ export class Search{
                 }
             }
             this.filterTag();
-            Recipe.displayRecipes(this.list[this.index])
-            console.timeEnd("algo 2: ");
+            Recipe.displayRecipes(this.list[this.index]);
         } else{
             this.textLength=0;
             this.index=0;
